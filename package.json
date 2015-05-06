@@ -1,0 +1,33 @@
+{
+  "name": "node-milight-local-promise",
+  "version": "0.0.1",
+  "description": "Extension of node-milight-promise to work with locally connected milight controllers on an embedded platform (such as Raspberry PI)",
+  "main": "src/index",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cognitivegears/node-milight-local-promise.git"
+  },
+  "keywords": [
+    "SmartHome",
+    "Milight",
+    "WifiLight",
+    "LimitlessLED",
+    "RaspberryPI",
+    "raspi",
+    "WifiLight",
+    "LED"
+  ],
+  "author": "Nathan Byrd",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cognitivegears/node-milight-local-promise/issues"
+  },
+  "homepage": "https://github.com/cognitivegears/node-milight-local-promise",
+  "dependencies": {
+    "node-milight-promise": "0.0.1",
+    "serialport": "^1.6.3"
+  }
+}
