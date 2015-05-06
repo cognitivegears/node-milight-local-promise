@@ -1,3 +1,4 @@
+var util = require('util');
 var Promise = require('bluebird');
 var dgram = require('dgram');
 var debug = process.env.hasOwnProperty('MILIGHT_DEBUG') ? consoleDebug : function () {
@@ -5,6 +6,10 @@ var debug = process.env.hasOwnProperty('MILIGHT_DEBUG') ? consoleDebug : functio
 
 var TTL_PORT = "/dev/ttyAMA0";
 var TTL_SPEED = 9600;
+
+function consoleDebug() {
+    console.log.apply(this, arguments);
+}
 
 var MilightController = require('node-milight-promise').MilightController;
 
@@ -14,6 +19,8 @@ var MilightLocalController = function(options) {
   this._ttlPort = options.ttlPort || TTL_PORT;
   this._ttlSpeed = options.ttlSpeed || TTL_SPEED;
 };
+
+util.inherits(MilightLocalController, MilightController);
 
 // Overload member functions
 MilightLocalController.prototype._createSocket = function () {
@@ -25,11 +32,12 @@ MilightLocalController.prototype._createSocket = function () {
       }
       else {
         debug("Initializing serial");
-        var socket = require("serialport").SerialPort;
-        self.clientSocket = new SerialPort(self._ttlPort, {baudrate: self._ttlSpeed});
-        self.clientSocket.on("open", function() {
+        var SerialPort = require("serialport").SerialPort;
+        var socket = new SerialPort(self._ttlPort, {baudrate: self._ttlSpeed});
+        socket.on("open", function() {
           resolve();  
         });
+        self.clientSocket = socket;
       }
     });
     return self._socketInit;
@@ -45,7 +53,8 @@ MilightLocalController.prototype._sendThreeByteArray = function(threeByteArray) 
 
   return new Promise(function (resolve, reject) {
     self._createSocket().then(function() {
-      self.clientSocket.send(buffer, function (error) {
+      var socket = self.clientSocket;
+      socket.write(buffer, function (error) {
         if(error) {
           debug("Serial socket error: " + error);
           return reject(error);
@@ -60,3 +69,4 @@ MilightLocalController.prototype._sendThreeByteArray = function(threeByteArray) 
   });
 };
 
+module.exports = MilightLocalController;

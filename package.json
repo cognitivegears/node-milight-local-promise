@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/cognitivegears/node-milight-local-promise",
   "dependencies": {
+    "bluebird": "^2.9.25",
     "node-milight-promise": "0.0.1",
     "serialport": "^1.6.3"
   }
