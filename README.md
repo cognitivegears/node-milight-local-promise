@@ -6,9 +6,9 @@ Important
 
 This module is intended for embedded platforms (e.g. Raspberry Pi) with a 
 hardware modified MiLight controller attached via serial/GPIO.  See 
-(LimitlessLED WiFi Bridge 4.0 Conversion to Raspberry Pi)[http://servernetworktech.com/2014/09/limitlessled-wifi-bridge-4-0-conversion-raspberry-pi/]
+[LimitlessLED WiFi Bridge 4.0 Conversion to Raspberry Pi](http://servernetworktech.com/2014/09/limitlessled-wifi-bridge-4-0-conversion-raspberry-pi/)
 for information on setting up this system.  If you are using a regular MiLight 
-controller, see [https://www.npmjs.com/package/node-milight-promise] for 
+controller, see [node-milight-promise](https://www.npmjs.com/package/node-milight-promise) for 
 the solution for you.
 
 Many thanks to Marcus Wittig for providing this excellent module and base for 
