@@ -4,7 +4,7 @@
   "description": "Extension of node-milight-promise to work with locally connected milight controllers on an embedded platform (such as Raspberry PI)",
   "main": "src/index",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "grunt mochaTest"
   },
   "repository": {
     "type": "git",
@@ -28,7 +28,19 @@
   "homepage": "https://github.com/cognitivegears/node-milight-local-promise",
   "dependencies": {
     "bluebird": "^2.9.25",
+    "coveralls": "^2.11.2",
+    "mocha-lcov-reporter": "0.0.2",
     "node-milight-promise": "0.0.1",
     "serialport": "^1.6.3"
+  },
+  "devDependencies": {
+    "chai": "^2.3.0",
+    "chai-as-promised": "^5.1.0",
+    "grunt": "^0.4.5",
+    "grunt-coveralls": "^1.0.0",
+    "grunt-mocha-test": "^0.12.7",
+    "mocha": "^2.2.5",
+    "mockery": "^1.4.0",
+    "sinon": "^1.14.1"
   }
 }

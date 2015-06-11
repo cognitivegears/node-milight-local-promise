@@ -6,6 +6,7 @@ var debug = process.env.hasOwnProperty('MILIGHT_DEBUG') ? consoleDebug : functio
 
 var TTL_PORT = "/dev/ttyAMA0";
 var TTL_SPEED = 9600;
+var COMPAT_MODE = false;
 
 function consoleDebug() {
     console.log.apply(this, arguments);
@@ -18,6 +19,7 @@ var MilightLocalController = function(options) {
   this.className = "MilightLocalController";
   this._ttlPort = options.ttlPort || TTL_PORT;
   this._ttlSpeed = options.ttlSpeed || TTL_SPEED;
+  this._compatMode = options.compatMode || COMPAT_MODE;
 };
 
 util.inherits(MilightLocalController, MilightController);
@@ -34,10 +36,10 @@ MilightLocalController.prototype._createSocket = function () {
         debug("Initializing serial");
         var SerialPort = require("serialport").SerialPort;
         var socket = new SerialPort(self._ttlPort, {baudrate: self._ttlSpeed});
+        self.clientSocket = socket;
         socket.on("open", function() {
           resolve();  
         });
-        self.clientSocket = socket;
       }
     });
     return self._socketInit;
@@ -48,6 +50,13 @@ MilightLocalController.prototype._sendThreeByteArray = function(threeByteArray) 
   if(!(threeByteArray instanceof Array)) {
     return Promise.reject(new Error("Array argument required"));
   }
+
+  // If compatibility mode is turned off, actually send a two byte array instead
+  if(threeByteArray.length > 2 && !(this._compatMode)) {
+    threeByteArray = threeByteArray.slice(0, 2);
+  }
+
+
   var buffer = new Buffer(threeByteArray);
   var self = this;
 
