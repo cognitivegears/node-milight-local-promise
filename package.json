@@ -1,6 +1,6 @@
 {
   "name": "node-milight-local-promise",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Extension of node-milight-promise to work with locally connected milight controllers on an embedded platform (such as Raspberry PI)",
   "main": "src/index",
   "scripts": {
