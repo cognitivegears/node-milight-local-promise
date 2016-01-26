@@ -31,7 +31,7 @@
     "coveralls": "^2.11.2",
     "mocha-lcov-reporter": "0.0.2",
     "node-milight-promise": "0.0.1",
-    "serialport": "^1.6.3"
+    "serialport": "^2.0.6"
   },
   "devDependencies": {
     "chai": "^2.3.0",
